@@ -6,6 +6,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	input = in;
 
 	// initialise game objects
+	player.setInput(input);
 
 }
 
@@ -17,20 +18,22 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
-
+	player.handleInput(dt);
 }
 
 // Update game objects
 void Level::update(float dt)
 {
-	
+	player.update(dt);
+	map.checkCollision(&player);
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
-
+	map.render(window);
+	window->draw(player);
 	endDraw();
 }
 
